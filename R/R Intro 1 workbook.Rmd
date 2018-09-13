@@ -1,0 +1,328 @@
+---
+title: "AIS Tech Lesson - R Intro 1"
+author: "AIS UIUC"
+date: "August 19, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**First thing first, set working directory**
+- files from working directory can be accessed through file names
+- files outside working directory have to be accessed through it's entire directory
+  + "C:/Non-Default aka Real Shit/College is a hot mess/Fall 2018/STAT 434/Homework/1"
+
+## R as a calculator
+
+#### Addition
+```{r}
+# What is 5 plus 7 (what is "#" ?)
+```
+
+#### Subtraction
+```{r}
+# what is 5 minus 7?
+```
+
+#### Multiplication
+```{r}
+# what is 3 times 5? 
+```
+
+#### Division
+```{r}
+# what is 3 divided by 5
+```
+
+#### **Exponentiation** 
+- the operation of raising one quantity to the power of another - $$x^n$$
+```{r}
+# what is the square of 9
+# what is the cube of 9
+
+# How do I do sqaure root then?
+```
+
+#### Order of calculation - same rule as in math, use "()" if confused
+```{r}
+# What is the order of calculation of this? 
+1 + 2^(4/2)*5 
+```
+
+#### **Modulo**
+```{r}
+# Take a guess, what do the following commands return? 
+5 %% 2
+7 %% 3
+22 %% 4
+```
+Why modulo? ...
+
+### **Built-in Functions**
+- Function you can directly call and use without loading a package
+- [Here is a link for R's built-in math functions](https://www.rdocumentation.org/packages/raster/versions/2.6-7/topics/Math-methods)
+
+#### Exponentials
+```{r}
+# Is this number familar to you? 
+exp(1)
+```
+
+#### logarithmic
+```{r}
+# base-10 logarithmic
+# base-2 logarithmic
+# what about natural logarithmic - base is exp(1), aka 2.7818......
+# base 5? 
+```
+
+
+
+
+
+
+## Variable
+- **Variable has a name, variable has a value, variable's name represents it's value (all you need to know to continue)**
+- Variable is a reference to a point/location of memory in which a specific value is stored
+- When referenced, the value stored in memory location is accessed
+- Why variable?
+  + assign meaning of a value (easier to read code)
+  + reuse 
+  
+  
+#### Assigning a value to a variable
+```{r}
+apple <- 5
+peach <- 7
+
+# how many fruit do we have? assign the answer to a new variable 
+```
+- you can assign to a variable value of many **data types**
+- **scope** - will cover when we touch on **functions**
+
+
+
+
+
+## Data Types
+#### Common Data Types
+-Numeric
+-String/Character
+-Categorical/Factorial
+  + a variable with a fixed set of values called levels
+-Boolean/logical
+  + True/False
+-Others
+```{r}
+a <- 12
+b <- 12.12
+c <- 'twelve' # just a set of "" will do the trick
+d <- "12"
+e <- TRUE
+f <- FALSE
+g <- a==a
+h <- a==b
+i <- factor(c)
+j <- NULL # why "NULL"? 
+k <- NA
+class(k) # "class()" check data type of an varaiable for you
+```
+
+
+
+
+
+#### Conversion
+```{r}
+as.numeric("12")
+as.character(k)
+as.factor(f)
+```
+- **Take-away: Conversion cannot take place in any direction**
+- [NULL vs NA](https://www.r-bloggers.com/r-na-vs-null/):
+  + "NULL" - often returned by expressions and functions whose values are undefined.
+  + "NA" - missing value, can be coerced to any data type, by default a logical
+
+## Logical/Boolean Operator
+- return **TRUE/FALSE**
+#### Test out the operators
+```{r}
+1 < 2
+1 > 2
+2 > 1
+1 >= 1 # larger or equal to
+1 >= 2
+2 >= 1
+2 == 2
+2 == 1
+# "<=" ...... you know what it is 
+2 != 2
+2 != 1
+!TRUE
+!(1==1)
+!(1!=1) # so what does "!x" do? ......
+```
+#### multiple conditions
+```{r}
+x = TRUE
+y = FALSE
+(x|y) # x or y
+(x&y) # 
+```
+- so what does "or", aka "|", do? ...
+- what does "and", aka "&",  do? ...
+
+
+
+
+## Vector Basics
+- Definition: A vector is a sequence of data elements of the **same basic type**
+- Most important feature - **vectorized operation**
+
+#### Creating a vector
+```{r}
+# create a vector & check it's type 
+a <- c(1,2,3)
+class(a)
+
+# how to check if a variable is vector?
+is.vector(a)
+is.vector(123)
+is.vector("one hundred twenty three")
+```
+- What..the..h.. - Well, vector is R's base data structure, as long as you don't create an variable explicitly as other structure, it is a vector
+
+#### Coercion
+```{r}
+a <- c(1, "one", TRUE) # multiple data types, that's impossible by definition! 
+a
+class(a)
+```
+- Coecion ordering, lower canbe coerced into higher (of only the data types we touched here)
+  + logical < numeric < factor < character
+  + Question, what is the numeric conversion of **TRUE/FALSE**? 
+
+#### Vectorized Operation
+- Vectorized operation is what makes vector a great data structure, let's see this in action
+```{r}
+# create a vector, name it whatever, assign it with 6 numeric values(your pick)
+
+# add a numeric value to it (any numeric value)
+
+# crate 3 other vector, one with 3 numeric values, one with 6 numeric values, and one with 5 numeric values
+
+# add each of these to your to your first whatever vector
+
+```
+
+-Try it on another data type
+```{r}
+# What does the following code do?
+logics <- rep(TRUE, 15)
+# print(logics)
+logics <- !logics
+# print(logics)
+booleans <- c(FALSE, TRUE, FALSE)
+booleans & logics
+booleans | logics
+```
+
+- Not just on operations through operators, through functions, too
+```{r}
+this <- sample.int(100, 10)
+print(this)
+that <- exp(this)
+print(that)
+```
+
+
+#### Indexing/slicing vectors
+```{r}
+a <- seq(0, 10, by=0.1)
+a
+
+# how to access the 50-th element?
+
+# how to access the first 15 element?
+
+# how to access the 16th to 30th element?
+
+a[1:10]
+```
+
+
+#### Aggregation functions over numeric vectors
+- Aggregation of vector - to collapse a multi-element vector into a single value (average, sum, etc.)
+```{r}
+a <- c(123, 1232, 123124, 123421, 12, 1.12)
+# what is the mean(average) of a
+# median
+# standard deviation
+# sum
+# minimum
+# maximum
+summary(a)
+```
+
+#### [*Other data structure*](http://adv-r.had.co.nz/Data-structures.html)
+
+
+
+
+
+
+
+
+## Base Plot
+
+#### Histogram
+```{r}
+# generate a set of random numbers from standard normal distribution
+ran <- rnorm(1000)
+hist(ran, breaks = 30, col = 'light blue')
+curve(dnorm(x, mean=0, sd=1), add = TRUE, col = 'red')
+```
+- Useful base plot arguments (for this stage)
+  + main - title of the plot
+  + xlab - label for x axis
+  + ylab - label for y axis
+  + xlim - limit for x axis
+  + ylim - limit for y axis
+
+#### barplot
+```{r}
+# creating the data, don't worry about the details here
+count <- c(15, 36, 40, 78)
+fruits <- c("apple", "pear", "peach", "banana")
+
+barplot(count, names.arg = fruits)
+```
+
+
+#### Scatter plot
+```{r}
+# using r built-in data mtcars
+attach(mtcars)
+plot(x = wt, y = mpg, col=cyl)
+
+# now customize this plot to make sense
+```
+
+
+## Getting Help 
+#### in R/RStudio
+```{r}
+
+```
+#### Google, Stackoverflow and more
+
+## Reading a csv file
+```{r}
+
+```
+
+
+## Data Frame
+
