@@ -316,7 +316,7 @@ plot(x = wt, y = mpg, col=cyl)
 ```{r}
 
 ```
-#### Google, Stackoverflow and more
+#### Google, [Stackoverflow](stackoverflow.com) and more
 
 ## Reading a csv file
 ```{r}
